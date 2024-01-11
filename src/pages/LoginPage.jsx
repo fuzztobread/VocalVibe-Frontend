@@ -7,6 +7,7 @@ import { Button, Divider, Inputbox, Logo } from "../components";
 import { connect } from 'react-redux';
 import { setUser } from '../features/user';
 import { jwtDecode } from "jwt-decode";
+import axios from 'axios';
 
 
 
@@ -45,6 +46,63 @@ const LoginPage = (props) => {
     },
   });
 
+  const continueWithGoogle = async () => {
+    try {
+      const res = await axios.get(`http://127.0.0.1:8000/auth/o/google-oauth2/?redirect_uri=http://localhost:3000`)
+
+      window.location.replace(res.data.authorization_url);
+    } catch (err) {
+
+    }
+  }
+
+  const googleLogin2 = async (googleUserData) => {
+    const loginData = {
+      email: googleUserData.email,
+      password: googleUserData.sub,
+    };
+
+    try {
+      const response = await fetch('http://127.0.0.1:8000/api/token/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(loginData),
+      });
+
+      if (response.ok) {
+        // Login successful
+        const tokens = await response.json();
+        console.log('Login successful', tokens);
+
+        const userResponse = await fetch('http://127.0.0.1:8000/api/users/me', {
+          headers: {
+            Authorization: `Bearer ${tokens.access}`,
+          },
+        });
+
+        if (userResponse.ok) {
+          const userData = await userResponse.json();
+          console.log(userData)
+          // Dispatch the setUser action to update the Redux store
+          props.setUser({ user: userData, token: tokens });
+          navigate('/home');
+
+        } else {
+          console.error('Failed to fetch user data:', userResponse.statusText);
+        }
+
+        // You can handle additional logic here, such as storing tokens in state
+      } else {
+        // Login failed
+        console.error('Login failed:', response.statusText);
+      }
+    } catch (error) {
+      console.error('Error:', error.message);
+    }
+  }
+
   const handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -78,7 +136,7 @@ const LoginPage = (props) => {
           console.log(userData)
           // Dispatch the setUser action to update the Redux store
           props.setUser({ user: userData, token: tokens });
-          navigate('/');
+          navigate('/home');
 
         } else {
           console.error('Failed to fetch user data:', userResponse.statusText);
@@ -118,11 +176,18 @@ const LoginPage = (props) => {
   <h1>lhsadfl</h1>
 </a>
 
+<button style={{color:'white'}} onClick={continueWithGoogle} type='submit'>login champs with google</button>
+
 <GoogleLogin
+text="continue_with"
+theme="outline"
+width="100%"
   onSuccess={credentialResponse => {
     var decoded = jwtDecode(credentialResponse.credential)
     console.log(decoded);
-    console.log(credentialResponse)
+    //console.log(credentialResponse.credential)
+    googleLogin2(decoded);
+    //console.log(credentialResponse)
   }}
   onError={() => {
     console.log('Login Failed');
