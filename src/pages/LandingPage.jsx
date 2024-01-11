@@ -16,7 +16,7 @@ const LandingPage = () => {
       <div className="landing-page relative flex items-center justify-center flex-col h-screen p-20 mt-5 -mt-150 overflow-hidden">
         <h1 className="text-4xl mb-6 text-white font-normal">Feel the Vibes, <span className="font-bold text-rose-500">Express the Emotion</span></h1>
         
-        <p className="lp-text text-10 mb-8 max-w-400 text-white leading-7">Unlock the power of your voice with Vocal Vibe. Our Speech Emotion Recognition (SER) system brings words to life, turning every conversation into an emotional journey.</p>
+        <p className="lp-text text-10 mb-8 max-w-400 text-white leading-7 text-center">Unlock the power of your voice with Vocal Vibe. Our Speech Emotion Recognition (SER) system brings words to life, turning every conversation into an emotional journey.</p>
 
         <div className="flex gap-80 justify-center">
           <button className="btdown">

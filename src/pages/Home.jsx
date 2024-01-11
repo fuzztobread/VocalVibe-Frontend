@@ -34,10 +34,18 @@ const Home = () => {
     }
   };
 
+  const handleMicClick = () => {
+    const fileInput = document.querySelector('input[type="file"]');
+    
+    // Check if a file is already selected
+    // if (!audioFile) {
+    //   fileInput.click();
+    // }
+  };
+
   return (
     <>
       <Navbar />
-      <Button />
       <div className="w-full h-full flex flex-col items-center justify-center mt-8">
 
         {/* Upload Button (Centered) */}
@@ -51,7 +59,7 @@ const Home = () => {
           <Lottie
             animationData={animationData}
             className="lottie-animation-home cursor-pointer"
-            onClick={() => document.querySelector('input[type="file"]').click()}
+            onClick={handleMicClick}
           />
         </label>
 
@@ -72,7 +80,6 @@ const Home = () => {
           </div>
         )}
       </div>
-      {/* <Lottie animationData={animationData} className="lottie-animation-home" /> */}
     </>
   );
 };
