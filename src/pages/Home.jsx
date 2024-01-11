@@ -4,10 +4,13 @@ import Navbar from "../components/Navbar";
 import Button from "../components/Button";
 import Lottie from 'lottie-react';
 import animationData from '../components/lot.json';
+import { useSelector, useDispatch } from "react-redux"; // Import the useSelector hook
 
-const Home = () => {
+
+const Home = (props) => {
   const [audioFile, setAudioFile] = useState(null);
   const [predictedEmotion, setPredictedEmotion] = useState(null);
+  const isAuthenticated = useSelector((state) => state.user.isAuthenticated); // Access the isAuthenticated state from the Redux store
 
   const handleUpload = (event) => {
     const file = event.target.files[0];
@@ -21,13 +24,13 @@ const Home = () => {
     formData.append('file', audioFile);
 
     try {
-      const response = await axios.post('http://127.0.0.1:5000/predict', formData);
+      const response = await axios.post('http://127.0.0.1:8000/api/predict/predict-emotion/', formData);
 
       if (response.data.error) {
         alert(`Error: ${response.data.error}`);
       } else {
         // Store the predicted emotion in state
-        setPredictedEmotion(response.data.emotion);
+        setPredictedEmotion(response.data);
       }
     } catch (error) {
       console.error('Error making prediction:', error);
@@ -42,7 +45,7 @@ const Home = () => {
     //   fileInput.click();
     // }
   };
-
+  console.log(isAuthenticated)
   return (
     <>
       <Navbar />
