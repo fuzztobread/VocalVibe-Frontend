@@ -186,13 +186,13 @@ body {
     padding: 20px;
     margin-top: -150px;
 }
-.button-container {
+/* .button-container {
   position: fixed;
   display: flex;
   gap: 80px; 
   justify-content: center;
   margin-top: -290px;
-}
+} */
 
 .get-started-button {
   margin-top: 400px;
@@ -215,4 +215,13 @@ body {
 }
 .lp-text{
   width: 610px;
+}
+.gap-80{
+  gap: 10rem;
+}
+.btdown{
+  padding-top: 50px;
+}
+.lottie-animation-home{
+  width:
 }

@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import axios from 'axios';
 import Navbar from "../components/Navbar";
 import Button from "../components/Button";
+import Lottie from 'lottie-react';
+import animationData from '../components/newani.json';
+
 
 const Home = () => {
   const [audioFile, setAudioFile] = useState(null);
@@ -68,6 +71,7 @@ const Home = () => {
           </div>
         )}
       </div>
+      <Lottie animationData={animationData} className="lottie-animation-home" />
     </>
   );
 };

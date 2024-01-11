@@ -13,7 +13,7 @@ const Navbar = () => {
         <div className="hidden w-full md:block md:w-auto" id="navbar-default">
           <ul className="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 bg-transparent">
             <li>
-              <a href="/" className="text-white hover:text-rose-500" aria-current="page">
+              <a href="/home" className="text-white hover:text-rose-500">
                 Home
               </a>
             </li>

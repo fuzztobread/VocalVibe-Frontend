@@ -29,12 +29,12 @@ function App() {
     <main className={theme}>
       <div className={`w-full min-h-sreen relative dark:bg-[#020b19] bg-white`}>
         <Routes>
-            <Route path='/' element={<Home />} />
+            <Route path='/home' element={<Home />} />
 
           <Route path='/sign-up' element={<SignupPage />} />
           <Route path='/sign-in' element={<LoginPage />} />
           <Route path='/about' element={<About />} />
-          <Route path = '/LandingPage' element={<LandingPage/>} />
+          <Route path = '/' element={<LandingPage/>} />
         </Routes>
 
         {isLoading && <Loading />}
