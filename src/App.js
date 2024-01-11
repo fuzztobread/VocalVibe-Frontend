@@ -6,19 +6,20 @@ import {
 } from "./pages";
 import Loading from "./components/Loading";
 import About from "./pages/About";
+import LandingPage from "./pages/LandingPage";
 
 
-function Layout() {
-  return (
-      <div className='w-full flex flex-col min-h-screen px-4 md:px-10 2xl:px-28'>
-        { /*<Navbar /> */}
-        <div className='flex-1'>
-          <Outlet />
-        </div>
-        {/* <Footer /> */}
-      </div>
-  );
-}
+// function Layout() {
+//   return (
+//       <div className='w-full flex flex-col min-h-screen px-4 md:px-10 2xl:px-28'>
+//         { /*<Navbar /> */}
+//         <div className='flex-1'>
+//           <Outlet />
+//         </div>
+//         {/* <Footer /> */}
+//       </div>
+//   );
+// }
 
 function App() {
   const theme = "dark";
@@ -28,13 +29,12 @@ function App() {
     <main className={theme}>
       <div className={`w-full min-h-sreen relative dark:bg-[#020b19] bg-white`}>
         <Routes>
-          <Route element={<Layout />}>
             <Route path='/' element={<Home />} />
-          </Route>
 
           <Route path='/sign-up' element={<SignupPage />} />
           <Route path='/sign-in' element={<LoginPage />} />
           <Route path='/about' element={<About />} />
+          <Route path = '/LandingPage' element={<LandingPage/>} />
         </Routes>
 
         {isLoading && <Loading />}

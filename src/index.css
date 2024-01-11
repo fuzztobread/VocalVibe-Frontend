@@ -176,3 +176,43 @@ body {
 .switch.light .ball {
   transform: translateX(2px);
 }
+.landing-page {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column; 
+    max-width: 800px;
+    margin: auto;
+    padding: 20px;
+    margin-top: -150px;
+}
+.button-container {
+  position: fixed;
+  display: flex;
+  gap: 80px; 
+  justify-content: center;
+  margin-top: -290px;
+}
+
+.get-started-button {
+  margin-top: 400px;
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: rgb(244 63 94);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.get-started-button:hover {
+  background-color: rgb(244 63 94);
+  color: white;
+}
+.lottie-animation{
+  margin-bottom: -400px;
+}
+.lp-text{
+  width: 610px;
+}
