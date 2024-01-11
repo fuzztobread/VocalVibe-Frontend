@@ -3,8 +3,7 @@ import axios from 'axios';
 import Navbar from "../components/Navbar";
 import Button from "../components/Button";
 import Lottie from 'lottie-react';
-import animationData from '../components/newani.json';
-
+import animationData from '../components/lot.json';
 
 const Home = () => {
   const [audioFile, setAudioFile] = useState(null);
@@ -49,9 +48,11 @@ const Home = () => {
             onChange={handleUpload}
             accept="audio/*"
           />
-          <div className="bg-rose-500 hover:bg-rose-700 px-6 py-3 rounded-full text-white cursor-pointer transition-all duration-300">
-            Upload Audio
-          </div>
+          <Lottie
+            animationData={animationData}
+            className="lottie-animation-home cursor-pointer"
+            onClick={() => document.querySelector('input[type="file"]').click()}
+          />
         </label>
 
         {/* Predict Button (Visible only after uploading) */}
@@ -71,7 +72,7 @@ const Home = () => {
           </div>
         )}
       </div>
-      <Lottie animationData={animationData} className="lottie-animation-home" />
+      {/* <Lottie animationData={animationData} className="lottie-animation-home" /> */}
     </>
   );
 };
