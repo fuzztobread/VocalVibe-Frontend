@@ -11,6 +11,7 @@ const Home = (props) => {
   const [audioFile, setAudioFile] = useState(null);
   const [predictedEmotion, setPredictedEmotion] = useState(null);
   const isAuthenticated = useSelector((state) => state.user.isAuthenticated); // Access the isAuthenticated state from the Redux store
+  const token = useSelector(state => state.user.token);
 
   const handleUpload = (event) => {
     const file = event.target.files[0];
@@ -24,7 +25,12 @@ const Home = (props) => {
     formData.append('file', audioFile);
 
     try {
-      const response = await axios.post('http://127.0.0.1:8000/api/predict/predict-emotion/', formData);
+      const response = await axios.post('http://127.0.0.1:8000/api/predict/predict-emotion/', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          'Authorization': `Bearer ${token.access}`, // Include the authentication token
+        },
+      })
 
       if (response.data.error) {
         alert(`Error: ${response.data.error}`);
