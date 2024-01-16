@@ -75,7 +75,7 @@ const Home = (props) => {
         {/* Predict Button (Visible only after uploading) */}
         {audioFile && (
           <div
-            className="bg-green-500 hover:bg-green-600 px-6 py-3 mt-4 rounded-full text-white cursor-pointer transition-all duration-300"
+            className="bg-rose-500 hover:bg-rose-600 px-6 py-3 mt-4 rounded-full text-white cursor-pointer transition-all duration-300"
             onClick={handlePredict}
           >
             Predict
@@ -84,8 +84,8 @@ const Home = (props) => {
 
         {/* Display Predicted Emotion */}
         {predictedEmotion && (
-          <div className="mt-4 text-2xl text-rose-500 font-bold">
-            Predicted Emotion: {predictedEmotion}
+          <div className="mt-8 text-2xl text-rose-500 font-normal">
+            Decode the Feels: Emotion Unveiled - {predictedEmotion}
           </div>
         )}
       </div>
