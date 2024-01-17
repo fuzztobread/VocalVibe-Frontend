@@ -3,6 +3,7 @@ import {
   Home,
   LoginPage,
   SignupPage,
+  Record,
 } from "./pages";
 import Loading from "./components/Loading";
 import About from "./pages/About";
@@ -35,6 +36,7 @@ function App() {
           <Route path='/sign-in' element={<LoginPage />} />
           <Route path='/about' element={<About />} />
           <Route path = '/' element={<LandingPage/>} />
+          <Route path = '/record' element={<Record />} />
         </Routes>
 
         {isLoading && <Loading />}
