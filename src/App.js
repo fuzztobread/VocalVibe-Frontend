@@ -10,6 +10,7 @@ import About from "./pages/About";
 import LandingPage from "./pages/LandingPage";
 
 
+
 // function Layout() {
 //   return (
 //       <div className='w-full flex flex-col min-h-screen px-4 md:px-10 2xl:px-28'>
