@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import axios from 'axios';
 import Navbar from "../components/Navbar";
 import Button from "../components/Button";
@@ -10,12 +10,15 @@ import { useSelector, useDispatch } from "react-redux"; // Import the useSelecto
 const Home = (props) => {
   const [audioFile, setAudioFile] = useState(null);
   const [predictedEmotion, setPredictedEmotion] = useState(null);
+  const [audioUrl, setAudioUrl] = useState(null);  // New state to store the audio URL
+  const audioRef = useRef(null);  // Ref for the audio element
   const isAuthenticated = useSelector((state) => state.user.isAuthenticated); // Access the isAuthenticated state from the Redux store
   const token = useSelector(state => state.user.token);
 
   const handleUpload = (event) => {
     const file = event.target.files[0];
     setAudioFile(file);
+    setAudioUrl(URL.createObjectURL(file));  // Create a URL for the uploaded file
     // Reset predicted emotion when a new file is uploaded
     setPredictedEmotion(null);
   };
@@ -71,6 +74,13 @@ const Home = (props) => {
             onClick={handleMicClick}
           />
         </label>
+
+        {audioUrl && (
+          <audio ref={audioRef} controls>
+            <source src={audioUrl} type="audio/wav" />
+            Your browser does not support the audio element.
+          </audio>
+        )}
 
         {/* Predict Button (Visible only after uploading) */}
         {audioFile && (
