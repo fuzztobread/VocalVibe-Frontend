@@ -76,10 +76,13 @@ const Home = (props) => {
         </label>
 
         {audioUrl && (
+          <>
           <audio ref={audioRef} controls>
             <source src={audioUrl} type="audio/wav" />
             Your browser does not support the audio element.
           </audio>
+          <a href={audioUrl} download={`recordings.wav`}>download</a>
+          </>
         )}
 
         {/* Predict Button (Visible only after uploading) */}
