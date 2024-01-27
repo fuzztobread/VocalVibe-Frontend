@@ -171,13 +171,6 @@ const LoginPage = (props) => {
                 Sign in to your account
               </h2>
             </div>
-
-            <a href="https://accounts.google.com/o/oauth2/auth?response_type=code&client_id=963076518708-u7b6mdhr18id93r8sdua5caqi8av2g26.apps.googleusercontent.com&scope=https://www.googleapis.com/auth/userinfo.email&redirect_uri=http://127.0.0.1:8000/api/google-oauth2/login/sdk/callback/">
-  <h1>lhsadfl</h1>
-</a>
-
-<button style={{color:'white'}} onClick={continueWithGoogle} type='submit'>login champs with google</button>
-
 <GoogleLogin
 text="continue_with"
 theme="outline"

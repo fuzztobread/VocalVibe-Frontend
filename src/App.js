@@ -5,6 +5,7 @@ import {
   SignupPage,
   Record,
 } from "./pages";
+import PredictedPage from "./pages/Predicted";
 import Loading from "./components/Loading";
 import About from "./pages/About";
 import LandingPage from "./pages/LandingPage";
@@ -38,6 +39,7 @@ function App() {
           <Route path='/about' element={<About />} />
           <Route path = '/' element={<LandingPage/>} />
           <Route path = '/record' element={<Record />} />
+          <Route path = '/predicted' element={<PredictedPage />} />
         </Routes>
 
         {isLoading && <Loading />}

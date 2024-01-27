@@ -18,10 +18,13 @@ const Navbar = () => {
               </Link>
             </li>
             <li>
+              <Link to="/predicted" className='text-white hover:text-rose-500'>History</Link>
+            </li>
+            {/* <li>
               <Link to="/record" className="text-white hover:text-rose-500">
                 Record
               </Link>
-            </li>
+            </li> */}
             <li>
               <Link to="/about" className="text-white hover:text-rose-500">
                 About
