@@ -1,8 +1,16 @@
 import React from 'react';
 import Logo from './Logo';
 import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { logoutUser } from '../features/user';
 
 const Navbar = () => {
+  const dispatch = useDispatch();
+
+  const handleLogout = () => {
+    // Dispatch the logoutUser action
+    dispatch(logoutUser());
+  };
   return (
     <nav className="bg-transparent">
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
@@ -31,7 +39,7 @@ const Navbar = () => {
               </Link>
             </li>
             <li>
-              <Link to="/sign-in" className="text-white hover:text-rose-500">
+              <Link onClick={handleLogout} to="/sign-in" className="text-white hover:text-rose-500">
                 Logout
               </Link>
             </li>
