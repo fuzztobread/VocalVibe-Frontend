@@ -30,78 +30,6 @@ const LoginPage = (props) => {
     });
   };
 
-  const googleLogin = useGoogleLogin({
-    clientId: "963076518708-u7b6mdhr18id93r8sdua5caqi8av2g26.apps.googleusercontent.com",
-    onSuccess: async (googleUser) => {
-      // Step 2: Handle successful Google login
-      console.log("Google login successful", googleUser);
-
-      // Additional logic, if needed
-    },
-    onError: (error) => {
-      // Step 3: Handle Google login error
-      console.error("Google login error", error);
-
-      // Additional error handling, if needed
-    },
-  });
-
-  const continueWithGoogle = async () => {
-    try {
-      const res = await axios.get(`http://127.0.0.1:8000/auth/o/google-oauth2/?redirect_uri=http://localhost:3000`)
-
-      window.location.replace(res.data.authorization_url);
-    } catch (err) {
-
-    }
-  }
-
-  const googleLogin2 = async (googleUserData) => {
-    const loginData = {
-      email: googleUserData.email,
-      password: googleUserData.sub,
-    };
-
-    try {
-      const response = await fetch('http://127.0.0.1:8000/api/token/', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(loginData),
-      });
-
-      if (response.ok) {
-        // Login successful
-        const tokens = await response.json();
-        console.log('Login successful', tokens);
-
-        const userResponse = await fetch('http://127.0.0.1:8000/api/users/me', {
-          headers: {
-            Authorization: `Bearer ${tokens.access}`,
-          },
-        });
-
-        if (userResponse.ok) {
-          const userData = await userResponse.json();
-          console.log(userData)
-          // Dispatch the setUser action to update the Redux store
-          props.setUser({ user: userData, token: tokens });
-          navigate('/home');
-
-        } else {
-          console.error('Failed to fetch user data:', userResponse.statusText);
-        }
-
-        // You can handle additional logic here, such as storing tokens in state
-      } else {
-        // Login failed
-        console.error('Login failed:', response.statusText);
-      }
-    } catch (error) {
-      console.error('Error:', error.message);
-    }
-  }
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -171,30 +99,6 @@ const LoginPage = (props) => {
                 Sign in to your account
               </h2>
             </div>
-<GoogleLogin
-text="continue_with"
-theme="outline"
-width="100%"
-  onSuccess={credentialResponse => {
-    var decoded = jwtDecode(credentialResponse.credential)
-    console.log(decoded);
-    //console.log(credentialResponse.credential)
-    googleLogin2(decoded);
-    //console.log(credentialResponse)
-  }}
-  onError={() => {
-    console.log('Login Failed');
-  }}
-/>;
-
-            <Button
-              onClick={() => googleLogin()}
-              label='Sign in with Google'
-              icon={<FcGoogle className='' />}
-              styles='w-full flex flex-row-reverse gap-4 bg-white dark:bg-transparent text-black dark:text-white px-5 py-2.5 rounded-full border border-gray-300'
-            />
-
-            <Divider label='or sign in with email' />
 
             <form className='mt-8 space-y-6' onSubmit={handleSubmit}>
               <div className='flex flex-col rounded-md shadow-sm -space-y-px gap-5'>

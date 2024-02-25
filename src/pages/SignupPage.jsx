@@ -30,7 +30,6 @@ const SignupPage = () => {
     });
   };
 
-  const googleLogin = async () => {};
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -101,7 +100,6 @@ const SignupPage = () => {
                 Sign up for an account
               </h2>
             </div>
-            {showForm ? (
               <form
                 className='max-w-md w-full mt-8 space-y-6 '
                 onSubmit={handleSubmit}
@@ -147,7 +145,7 @@ const SignupPage = () => {
                     onChange={handleChange}
                   />
 
-                  <div className='flex items-center justify-between py-4'>
+                  {/* <div className='flex items-center justify-between py-4'>
                     <label
                       className='flex items-center gap-1 text-base text-black dark:text-gray-500 cursor-pointer'
                       htmlFor='imgUpload'
@@ -163,7 +161,7 @@ const SignupPage = () => {
                       <BiImages />
                       <span>Picture</span>
                     </label>
-                  </div>
+                  </div> */}
                 </div>
 
                 <Button
@@ -172,25 +170,6 @@ const SignupPage = () => {
                   styles='group relative w-full flex justify-center py-2.5 2xl:py-3 px-4 border border-transparent text-sm font-medium rounded-full text-white bg-black dark:bg-rose-800 hover:bg-rose-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-rose-500 '
                 />
               </form>
-            ) : (
-              <>
-                <div className='max-w-md w-full space-y-8'>
-                  <Button
-                    onClick={() => googleLogin()}
-                    label='Sign up with Google'
-                    icon={<FcGoogle className='text-xl' />}
-                    styles='w-full flex flex-row-reverse gap-4 bg-black dark:bg-transparent dark:border text-white px-5 py-2.5 rounded-full'
-                  />
-                  <Divider label='OR' />
-
-                  <Button
-                    onClick={() => setShowForm(true)}
-                    label='Continue with email'
-                    styles='w-full gap-4 bg-white text-black dark:bg-rose-800 dark:text-white px-5 py-2.5 rounded-full border dark:border-none border-gray-300'
-                  />
-                </div>
-              </>
-            )}
 
             <p className='max-w-md w-full text-center text-gray-600 dark:text-gray-300'>
               Already has an account?{" "}
