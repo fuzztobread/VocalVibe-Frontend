@@ -1,11 +1,16 @@
 import React from 'react';
 import Logo from './Logo';
 import { Link } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
 import { logoutUser } from '../features/user';
+import { useDispatch, useSelector } from 'react-redux'; // Import useSelector
+
 
 const Navbar = () => {
   const dispatch = useDispatch();
+
+  const user = useSelector(state => state.user.user);
+  console.log(user)
+
 
   const handleLogout = () => {
     // Dispatch the logoutUser action
@@ -38,6 +43,11 @@ const Navbar = () => {
                 About
               </Link>
             </li>
+            {user && (
+              <p className="text-white hover:text-rose-500">
+                {user.first_name}
+              </p>
+            )}
             <li>
               <Link onClick={handleLogout} to="/sign-in" className="text-white hover:text-rose-500">
                 Logout
