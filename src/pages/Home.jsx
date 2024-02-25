@@ -10,7 +10,7 @@ import upload from "../assets/upload.svg";
 import mic from "../assets/mic.svg";
 import animationData1 from '../components/lot.json';
 import animationData2 from '../components/lots2.json';
-
+import Loading from '../components/Loading.jsx';
 const Home = (props) => {
   const [audioFile, setAudioFile] = useState(null);
   const [predictedEmotion, setPredictedEmotion] = useState(null);
@@ -18,8 +18,8 @@ const Home = (props) => {
   const audioRef = useRef(null);  // Ref for the audio element
   const isAuthenticated = useSelector((state) => state.user.isAuthenticated); // Access the isAuthenticated state from the Redux store
   const token = useSelector(state => state.user.token);
-
   const [isSelected, setIsSelected] = useState(false);
+  const [loading, setLoading] = useState(false); // Loading state
 
   const audioChunks = useRef([]);
   const [recordings, setRecordings] = useState([]);
@@ -72,6 +72,7 @@ const Home = (props) => {
   };
 
   const handlePredict1 = async () => {
+    setLoading(true); // Set loading to true when predicting starts
     const formData = new FormData();
     formData.append('file', audioFile, 'recording.wav'); // Append with file name
 
@@ -90,8 +91,12 @@ const Home = (props) => {
       }
     } catch (error) {
       console.error('Error making prediction:', error);
+    } finally {
+      setLoading(false); // Set loading to false when prediction is done
     }
   };
+
+  const audioFileInputRef = useRef(null);
 
   const handleUpload = (event) => {
     const file = event.target.files[0];
@@ -101,37 +106,20 @@ const Home = (props) => {
     setPredictedEmotion(null);
   };
 
-  const handlePredict = async () => {
-    const formData = new FormData();
-    formData.append('file', audioFile);
-
-    try {
-      const response = await axios.post('http://127.0.0.1:8000/api/predict/predict-emotion/', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-          'Authorization': `Bearer ${token.access}`, // Include the authentication token
-        },
-      })
-
-      if (response.data.error) {
-        alert(`Error: ${response.data.error}`);
-      } else {
-        // Store the predicted emotion in state
-        setPredictedEmotion(response.data);
-      }
-    } catch (error) {
-      console.error('Error making prediction:', error);
-    }
-  };
-
   const handleUploadButton = () => {
-    const fileInput = document.querySelector('input[type="file"]');
+    audioFileInputRef.current.click();
   };
-  console.log(isAuthenticated)
+
   return (
     <>
       <Navbar />
       <div className="w-full h-full flex flex-col items-center justify-center mt-8">
+        {/* Loading bar */}
+        {loading && (
+          <div className="w-full bg-gray-300 h-2 rounded-full overflow-hidden">
+            <div className="bg-rose-500 h-full animate-loading-bar"></div>
+          </div>
+        )}
 
         {/* Upload Button (Centered) */}
         {isSelected && <label className="relative overflow-hidden">
@@ -140,6 +128,7 @@ const Home = (props) => {
             className="hidden"
             onChange={handleUpload}
             accept="audio/*"
+            ref={audioFileInputRef}
           />
           <Lottie
             animationData={animationData}
@@ -162,7 +151,7 @@ const Home = (props) => {
         {audioFile && isSelected && (
           <div
             className="bg-rose-500 hover:bg-rose-600 px-6 py-3 mt-4 rounded-full text-white cursor-pointer transition-all duration-300"
-            onClick={handlePredict}
+            onClick={handlePredict1}
           >
             Predict
           </div>
