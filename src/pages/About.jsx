@@ -7,7 +7,7 @@ const About = () => {
   const emotions = [
     {
       title: "Happy",
-      image: "/images/hap.png",
+      image: "/images/happy.png",
       description: "Description about happy emotion.",
     },
     {
@@ -17,12 +17,12 @@ const About = () => {
     },
     {
       title: "Disgust",
-      image: "/images/dis.png",
+      image: "/images/disgust.png",
       description: "Description about disgust emotion.",
     },
     {
       title: "Neutral",
-      image: "/images/neu.png",
+      image: "/images/neutral.png",
       description: "Description about neutral emotion.",
     },
     {
@@ -32,17 +32,17 @@ const About = () => {
     },
     {
       title: "Pleasant",
-      image: "/images/pls.png",
+      image: "/images/pleasant.png",
       description: "Description about pleasant emotion.",
     },
     {
       title: "Surprised",
-      image: "/images/sur.png",
+      image: "/images/surprised.png",
       description: "Description about surprised emotion.",
     },
     {
       title: "Angry",
-      image: "/images/ang.png",
+      image: "/images/angry.png",
       description: "Description about angry emotion.",
     },
   ];

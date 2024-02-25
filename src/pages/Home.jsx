@@ -11,6 +11,8 @@ import mic from "../assets/mic.svg";
 import animationData1 from '../components/lot.json';
 import animationData2 from '../components/lots2.json';
 import Loading from '../components/Loading.jsx';
+import confetti from 'canvas-confetti';
+
 const Home = (props) => {
   const [audioFile, setAudioFile] = useState(null);
   const [predictedEmotion, setPredictedEmotion] = useState(null);
@@ -26,6 +28,7 @@ const Home = (props) => {
   const mediaRecorderRef = useRef(null);
   const [recordingOrNotRecording, setRecordingOrNotRecording] = useState(false);
 
+  
   useEffect(() => {
     // Your function to be triggered when isSelected changes
     resetValues();
@@ -75,7 +78,7 @@ const Home = (props) => {
     setLoading(true); // Set loading to true when predicting starts
     const formData = new FormData();
     formData.append('file', audioFile, 'recording.wav'); // Append with file name
-
+  
     try {
       const response = await axios.post('http://127.0.0.1:8000/api/predict/predict-emotion/', formData, {
         headers: {
@@ -83,11 +86,21 @@ const Home = (props) => {
           'Authorization': `Bearer ${token.access}`,
         },
       });
-
+  
       if (response.data.error) {
         alert(`Error: ${response.data.error}`);
       } else {
         setPredictedEmotion(response.data);
+  
+        // Trigger confetti animation on successful prediction
+        confetti({
+          particleCount: 100,
+          angle: 60,
+          spread: 360,
+          startVelocity: 30,
+          decay: 0.9,
+          colors: ['#f44336', '#e91e63', '#9c27b0', '#3f51b5', '#03a9f4'],
+        });
       }
     } catch (error) {
       console.error('Error making prediction:', error);
@@ -114,6 +127,11 @@ const Home = (props) => {
     <>
       <Navbar />
       <div className="w-full h-full flex flex-col items-center justify-center mt-8">
+      <h1 className="text-4xl text-center mb-16">
+          <span className="text-3xl font-semibold dark:text-white">Decode Your Voice,</span> <br/>
+          <span className="text-3xl font-semibold text-rose-500">Discover Your True Emotions</span>
+        </h1>
+
         {/* Loading bar */}
         {loading && (
           <div className="w-full bg-gray-300 h-2 rounded-full overflow-hidden">

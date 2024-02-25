@@ -9,6 +9,7 @@ import PredictedPage from "./pages/Predicted";
 import Loading from "./components/Loading";
 import About from "./pages/About";
 import LandingPage from "./pages/LandingPage";
+import Profile from "./pages/Profile";
 
 
 
@@ -40,6 +41,7 @@ function App() {
           <Route path = '/' element={<LandingPage/>} />
           <Route path = '/record' element={<Record />} />
           <Route path = '/predicted' element={<PredictedPage />} />
+          <Route path = '/profile' element={<Profile />} />
         </Routes>
 
         {isLoading && <Loading />}

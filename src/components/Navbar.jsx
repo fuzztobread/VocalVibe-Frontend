@@ -9,8 +9,6 @@ const Navbar = () => {
   const dispatch = useDispatch();
 
   const user = useSelector(state => state.user.user);
-  console.log(user)
-
 
   const handleLogout = () => {
     // Dispatch the logoutUser action
@@ -30,9 +28,9 @@ const Navbar = () => {
                 Home
               </Link>
             </li>
-            <li>
+            {/* <li>
               <Link to="/predicted" className='text-white hover:text-rose-500'>History</Link>
-            </li>
+            </li> */}
             {/* <li>
               <Link to="/record" className="text-white hover:text-rose-500">
                 Record
@@ -43,11 +41,14 @@ const Navbar = () => {
                 About
               </Link>
             </li>
+            <li>
             {user && (
-              <p className="text-white hover:text-rose-500">
-                {user.first_name}
-              </p>
-            )}
+  <Link to="/profile" className="text-white hover:text-rose-500">
+    Hello, {user.first_name.charAt(0).toUpperCase() + user.first_name.slice(1)}
+  </Link>
+)}
+
+            </li>
             <li>
               <Link onClick={handleLogout} to="/sign-in" className="text-white hover:text-rose-500">
                 Logout
