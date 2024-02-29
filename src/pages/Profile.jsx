@@ -1,54 +1,80 @@
-import React, { useState, useEffect } from 'react';
-import Navbar from '../components/Navbar';
+import React from 'react';
+import { useState } from 'react';
+import Wave from 'react-wavify';
+import { motion } from 'framer-motion';
 import { useSelector } from 'react-redux';
+import Navbar from '../components/Navbar';
 import { Link } from 'react-router-dom';
-import Wave from 'react-wavify'; // Import the Wave component for animation
 
 const Profile = () => {
   const user = useSelector(state => state.user.user);
-  const [wavePosition, setWavePosition] = useState('center');
+  const [wavePosition, setWavePosition] = useState('bottom');
 
-  useEffect(() => {
-    const handleMouseMove = (event) => {
-      const containerWidth = document.querySelector('.profile-container').offsetWidth;
-      const cursorX = event.clientX;
-      const wavePosition = cursorX < containerWidth / 2 ? 'left' : 'right';
-      setWavePosition(wavePosition);
-    };
+  const waveVariants = {
+    hidden: { opacity: 0 },
+    visible: { opacity: 1 },
+  };
 
-    window.addEventListener('mousemove', handleMouseMove);
+  const waveTransition = {
+    duration: 1,
+    ease: 'easeInOut',
+  };
 
-    return () => window.removeEventListener('mousemove', handleMouseMove);
-  }, []);
+  const handleWavePosition = () => {
+    setWavePosition(wavePosition === 'bottom' ? 'top' : 'bottom');
+  };
 
   return (
     <>
-      <Navbar />
-      <div className="profile-container mx-auto max-w-2xl mt-10">
-        <Wave
-          fill="#f0f0f0"
-          options={{
-            amplitude: 25,
-            speed: 0.15,
-            points: 3,
-            height: 150, // Adjust height as needed
-          }}
-          className={`wave ${wavePosition}`} // Dynamically add class based on wavePosition
-        />
-
-        <div className="profile-card bg-white shadow-md rounded-lg p-5">
-          <div className="flex items-center justify-between mb-4">
-            <h1 className="text-2xl font-semibold">{user.first_name} {user.last_name}</h1>
-            <Link to="/predicted" className="button">View History</Link>
-          </div>
+    <Navbar />
+    
+    <div className="relative min-h-screen #f0f0f0">
+      
+     
+      <div className="flex items-center justify-center min-h-screen">
+        <div className="bg-white bg-opacity-75 rounded-lg shadow-md p-5">
+          <img className="w-32 h-32 rounded-full mx-auto mb-5" src="https://source.unsplash.com/random" alt="Profile" />
+          <h1 className="text-3xl font-semibold text-center mb-5 text-white">{user.first_name} {user.last_name}</h1>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <p className="text-gray-700"><strong>Email Address:</strong> {user.email}</p>
-            {/* Add more profile data fields here as needed */}
+            <div className="bg-white rounded-lg shadow-md p-4">
+              <h2 className="text-xl font-semibold mb-2 text-gray-800">Email Address</h2>
+              <p className="text-gray-700">{user.email}</p>
+            </div>
+            <div className="bg-white rounded-lg shadow-md p-4">
+              <h2 className="text-xl font-semibold mb-2 text-gray-800">Membership Status</h2>
+              <p className="text-gray-700">Active</p>
+            </div>
+            {/* Add 
+            more Card components as needed */}
           </div>
+          <div className="mt-5 text-center">
+              <Link to="/predicted" className="button" >View History</Link>
+            </div>
         </div>
       </div>
+      <motion.div
+        className={`absolute ${wavePosition === 'bottom' ? 'bottom-0' : 'top-0'} w-full`}
+        initial="hidden"
+        animate="visible"
+        transition={waveTransition}
+        variants={waveVariants}
+      >
+        <Wave
+          className="h-64"
+          fill="rgba(255, 255, 255, 0.5)"
+          paused={false}
+          options={{
+            height: 50,
+            amplitude: 50,
+            speed: 0.2,
+            points: 3,
+          }}
+        />
+      </motion.div>
+    </div>
     </>
   );
+  
 };
 
 export default Profile;
