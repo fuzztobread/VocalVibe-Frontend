@@ -42,6 +42,11 @@ const Navbar = () => {
               </Link>
             </li>
             <li>
+              <Link to="/sentiment" className="text-white hover:text-rose-500">
+                sentiment also
+              </Link>
+            </li>
+            <li>
             {user && (
   <Link to="/profile" className="text-white hover:text-rose-500">
     Hello, {user.first_name.charAt(0).toUpperCase() + user.first_name.slice(1)}
