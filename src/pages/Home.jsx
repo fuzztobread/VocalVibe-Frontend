@@ -140,6 +140,7 @@ const Home = (props) => {
         )}
 
         {/* Upload Button (Centered) */}
+<<<<<<< Updated upstream
         {isSelected && <label className="relative overflow-hidden">
           <input
             type="file"
@@ -154,6 +155,24 @@ const Home = (props) => {
             onClick={handleUploadButton}
           />
         </label>}
+=======
+        {isSelected && (
+  <div className="relative overflow-hidden">
+    <input
+      type="file"
+      className="hidden"
+      onChange={handleUpload}
+      accept="audio/*"
+      ref={audioFileInputRef}
+    />
+    <Lottie
+      animationData={animationData}
+      className="lottie-animation-home cursor-pointer"
+      onClick={handleUploadButton}
+    />
+  </div>
+)}
+>>>>>>> Stashed changes
 
         {audioUrl && isSelected && (
           <>

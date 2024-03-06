@@ -3,7 +3,6 @@ import {
   Home,
   LoginPage,
   SignupPage,
-  Record,
 } from "./pages";
 import PredictedPage from "./pages/Predicted";
 import Loading from "./components/Loading";
@@ -40,10 +39,13 @@ function App() {
           <Route path='/sign-in' element={<LoginPage />} />
           <Route path='/about' element={<About />} />
           <Route path = '/' element={<LandingPage/>} />
+<<<<<<< Updated upstream
           <Route path = '/record' element={<Record />} />
           <Route path = '/predicted' element={<PredictedPage />} />
           <Route path = '/profile' element={<Profile />} />
           <Route path = '/sentiment' element={<Sentiment />} />
+=======
+>>>>>>> Stashed changes
         </Routes>
 
         {isLoading && <Loading />}
