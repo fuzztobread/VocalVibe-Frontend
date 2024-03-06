@@ -80,7 +80,7 @@ const Sentiment = (props) => {
     formData.append('file', audioFile, 'recording.wav'); // Append with file name
   
     try {
-      const response = await axios.post('http://127.0.0.1:8000/api/predict/predict-emotion/', formData, {
+      const response = await axios.post('http://127.0.0.1:8000/api/predict/prediction-emotion-sentiment/', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
           'Authorization': `Bearer ${token.access}`,
@@ -90,8 +90,8 @@ const Sentiment = (props) => {
       if (response.data.error) {
         alert(`Error: ${response.data.error}`);
       } else {
-        setPredictedEmotion(response.data);
-  
+        setPredictedEmotion(response.data.prediction_result);
+        console.log(response.data)
         // Trigger confetti animation on successful prediction
         confetti({
           particleCount: 100,
